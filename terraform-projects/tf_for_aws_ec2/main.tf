@@ -1,8 +1,19 @@
 # main.tf
 
 # Specify the provider (AWS)
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+
 provider "aws" {
   region = var.region # Replace with your desired AWS region
+  profile = var.profile # Optional: Specify the AWS profile to use
 }
 
 # Define the EC2 instance
@@ -23,7 +34,7 @@ resource "aws_instance" "example" {
 
 # Optional: Define a security group to allow SSH access
 resource "aws_security_group" "allow_ssh" {
-  name        = "allow_ssh"
+  name        = "allow_ssh_service"
   description = "Allow SSH inbound traffic"
 
   ingress {
@@ -31,18 +42,18 @@ resource "aws_security_group" "allow_ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = var.allowed_ssh_cidr # Allow SSH from anywhere (restrict for production)
+    cidr_blocks = [var.allowed_ssh_cidr] # Allow SSH from anywhere (restrict for production)
   }
 
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1" # Allow all outbound traffic
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.allowed_ssh_cidr]
   }
 
   tags = {
-    Name = "allow_ssh"
+    Name = "allow_ssh_service"
   }
 }
 

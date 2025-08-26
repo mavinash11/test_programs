@@ -22,5 +22,5 @@ def file_error():
 
 
 # check_num()
-
-file_error()
+if __name__ == "__main__":
+    file_error()
