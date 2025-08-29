@@ -1,2 +1,0 @@
-docker login -u mavinash1105
-dckr_pat_PH6z8EHrCs8N-whJVFLVmEpGWQs
