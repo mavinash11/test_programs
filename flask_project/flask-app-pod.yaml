@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: python-flask-app
+  labels:
+    app: python-flask-app
+spec:
+  containers:
+    - name: python-flask-app
+      image: mavinash1105/flask_app:linuxv1
+      ports:
+        - containerPort: 5010
+      imagePullPolicy: Always
+      resources:
+        limits:
+          memory: "256Mi"
+          cpu: "500m"
+        requests:
+          memory: "128Mi"
+          cpu: "250m"

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-flask-app-deployment
+  labels:
+    app: python-flask-app
+spec:
+  template:
+    metadata:
+      name: python-flask-app
+      labels:
+        app: python-flask-app
+    spec:
+      containers:
+        - name: python-flask-app
+          image: mavinash1105/flask_app:linuxv2
+          ports:
+            - containerPort: 5010
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: python-flask-app

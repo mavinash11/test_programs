@@ -29,9 +29,22 @@ def fahrenheit_from(celsius):
     try:
         fahrenheit = float(celsius) * 9 / 5 + 32
         fahrenheit = round(fahrenheit, 3)  # Round to three decimal places
-        return f"Temperature in Fahrenheit: {str(fahrenheit)}"
+        return (f"Your temperature in Fahrenheit: {str(fahrenheit)}." + "\n" +
+                "Normal human body temperature is 97 degree Fahrenheit." + "\n"*4)
     except ValueError:
-        return f"Invalid Input:  {celsius}"
+        return f"Invalid Input:  {celsius}" + "\n"*4
+
+
+@app.route("/fahrenheit/<fahrenheit>", methods=["GET"])
+def celsius_from(fahrenheit):
+    """Convert Fahrenheit to Celsius degrees."""
+    try:
+        celsius = (float(fahrenheit) - 32.0) * 5/9
+        celsius = round(celsius, 2)  # Round to three decimal places
+        return (f"Your temperature in Celsius: {str(celsius)}." + "\n" +
+                f"Normal human body temperature is 37 degree Celsius." + "\n"*4)
+    except ValueError:
+        return f"Invalid Input:  {fahrenheit}" + "\n"*4
 
 
 @app.route("/hello/<name>", methods=['GET'])
