@@ -29,3 +29,10 @@ resource "local_file" "test2" {
   }
 }
 
+output "testfile_name" {
+  value = local_file.test.filename
+}
+
+output "testfile2_name" {
+  value = local_file.test2.filename
+}
