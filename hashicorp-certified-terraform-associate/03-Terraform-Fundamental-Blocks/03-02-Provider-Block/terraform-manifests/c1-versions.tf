@@ -1,18 +1,22 @@
 # Terraform Block
 terraform {
+  /*
   required_version = ">= 1.4.1"
+  */
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = ">= 4.0"
+      version = ">= 6.0"
     }
   }
 }
 
 # Provider Block
 provider "aws" {
-  region = "us-east-1"  
-  profile = "default" 
+  region = "ap-south-1"
+  profile = "avinash_test"
+  shared_credentials_files = ["$HOME/.aws/credentials"]
+  shared_config_files = ["$HOME/.aws/config"]
 }
 
 /*

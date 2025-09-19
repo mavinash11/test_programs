@@ -11,13 +11,15 @@ terraform {
     # Random Provider
     random = {
       source  = "hashicorp/random"
-      version = "3.0.0"
+      version = ">=3.0.0"
     }
   }
 }
 
 # Provider Block
 provider "aws" {
-  region = "us-east-1"
-  profile = "default" # Defining it for default profile is Optional
+  region = "ap-south-1"
+  profile = "avinash_test" # Defining it for default profile is Optional
+  shared_credentials_files = ["$HOME/.aws/credentials"]
+  shared_config_files = ["$HOME/.aws/config"]
 }
