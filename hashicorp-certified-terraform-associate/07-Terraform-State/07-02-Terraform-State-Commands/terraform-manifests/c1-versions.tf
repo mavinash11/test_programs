@@ -4,14 +4,14 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
   # Adding Backend as S3 for Remote State Storage
   backend "s3" {
-    bucket = "terraform-stacksimplify"
+    bucket = "terraform-stacksimplify-avinash-malagave"
     key    = "statecommands/terraform.tfstate"
-    region = "us-east-1" 
+    region = "ap-south-1"
 
     # Enable during Step-09     
     # For State Locking
@@ -23,7 +23,7 @@ terraform {
 # Provider Block
 provider "aws" {
   region  = var.aws_region
-  profile = "default"
+  profile = "user_avinash"  # Change as per your AWS Credentials Profile
 }
 /*
 Note-1:  AWS Credentials Profile (profile = "default") configured on your local desktop terminal  

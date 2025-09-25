@@ -17,8 +17,7 @@ output "ec2_security_groups" {
 }
 
 # Attribute Reference - Create Public DNS URL with http:// appended
-output "ec2_publicdns" {
-  description = "Public DNS URL of an EC2 Instance"
+output "ec2_public_dns_url" {
+  description = "Ec2 Instance Public DNS URL"
   value = "http://${aws_instance.my-ec2-vm.public_dns}"
-  #sensitive = true   #Uncomment it during step-04 execution
 }

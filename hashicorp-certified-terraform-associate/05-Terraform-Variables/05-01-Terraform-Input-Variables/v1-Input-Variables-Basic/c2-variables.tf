@@ -2,17 +2,29 @@
 variable "aws_region" {
   description = "Region in which AWS resources to be created"
   type        = string
-  default     = "us-east-1"
+  default     = "ap-south-1" # Mumbai Region
 }
 
 variable "ec2_ami_id" {
   description = "AMI ID"
   type        = string
-  default     = "ami-0915bcb5fa77e4892" # Amazon2 Linux AMI ID
+  default     = "ami-01b6d88af12965bb6" # Amazon2 Linux AMI ID
 }
 
 variable "ec2_instance_count" {
   description = "EC2 Instance Count"
   type        = number
   default     = 1
+}
+
+variable "ec2_instance_type" {
+  description = "EC2 Instance Type"
+  type        = string
+  default     = "t3.micro"
+}
+
+variable "ec2_access_key_name" {
+  description = "EC2 Access Key Name"
+  type        = string
+  default     = "terraform-key"
 }

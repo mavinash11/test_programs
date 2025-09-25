@@ -2,7 +2,7 @@
 variable "aws_region" {
   description = "Region in which AWS Resources to be created"
   type = string
-  default = "us-east-1"
+  default = "ap-south-1"
 }
 
 /* 
@@ -20,3 +20,8 @@ variable "ec2_instance_type" {
   default = "t3.micro"
 }
 
+variable "instance_count" {
+  description = "Number of EC2 Instances to be created"
+  type = number
+  default = 2
+}
