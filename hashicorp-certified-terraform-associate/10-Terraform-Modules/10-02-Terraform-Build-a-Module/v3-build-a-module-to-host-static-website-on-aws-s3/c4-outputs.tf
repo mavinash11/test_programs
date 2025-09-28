@@ -25,4 +25,8 @@ output "static_website_url" {
   value = module.website_s3_bucket.static_website_url
 }
 
+output "bucket_region" {
+  description = "S3 Bucket Region"
+  value       = module.website_s3_bucket.bucket_region
+}
 

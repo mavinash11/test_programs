@@ -1,4 +1,4 @@
-bucket_name = "mybucket-2051"
+bucket_name = "mybucket-avinash-malagave-2025"
 tags = {
   Terraform   = "true"
   Environment = "dev"

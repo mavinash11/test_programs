@@ -43,6 +43,12 @@ resource "aws_s3_bucket_public_access_block" "mywebsite" {
   restrict_public_buckets = false
 }
 
+
+resource "aws_s3_bucket_policy" "allow_put_objects" {
+  bucket = aws_s3_bucket.mywebsite.id
+  policy = data.aws_iam_policy_document.s3_put_policy.json
+}
+
 # Resource-6: aws_s3_bucket_acl
 resource "aws_s3_bucket_acl" "mywebsite" {
   depends_on = [
