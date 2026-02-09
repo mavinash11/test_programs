@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-end-app
+  namespace: default          # ← explicit is good (change if needed)
+  labels:
+    app.kubernetes.io/name: front-end
+    app.kubernetes.io/part-of: myapp
+    app.kubernetes.io/version: "1.0.0"   # recommended semantic versioning
+spec:
+  replicas: 3
+  revisionHistoryLimit: 10              # keep last 10 rollouts for rollback
+  progressDeadlineSeconds: 600          # fail rollout if not ready in 10 min
+
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: front-end   # ← standardized, consistent selector
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1                       # or 25%
+      maxUnavailable: 0                 # zero-downtime (needs ≥2-3 replicas)
+
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: front-end   # must match .spec.selector
+        app.kubernetes.io/part-of: myapp
+
+    spec:
+      terminationGracePeriodSeconds: 30   # give nginx time to finish requests
+
+      containers:
+      - name: nginx
+        image: nginx:1.27-alpine          # pinned version – avoid :latest in prod!
+        imagePullPolicy: IfNotPresent     # or Always if testing frequently
+
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+
+        resources:                        # ← very important in production
+          requests:
+            cpu: "100m"                   # 0.1 core
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+
+        livenessProbe:                    # restart if unhealthy
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 15
+          periodSeconds: 20
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        readinessProbe:                   # only send traffic when ready
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
+
+        lifecycle:                        # graceful shutdown
+          preStop:
+            exec:
+              command: ["/bin/sh", "-c", "sleep 5"]  # drain connections
