@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-api-green
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: payment-api
+      version: green
+  template:
+    metadata:
+      labels:
+        app: payment-api
+        version: green
+    spec:
+      containers:
+        - name: payment-api
+          image: nginx
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10

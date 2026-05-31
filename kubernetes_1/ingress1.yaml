@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: payment-api-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: payment.example.com
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: payment-api-service
+                port:
+                  number: 80
