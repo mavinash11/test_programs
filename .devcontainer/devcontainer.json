@@ -6,14 +6,6 @@
 		},
 		"ghcr.io/postfinance/devcontainer-features/terraform:1": {
 			"version": "latest"
-		},
-	"customizations": {
-		"vscode": {
-		"extensions": [
-			"hashicorp.terraform",
-			"amazonwebservices.aws-toolkit-vscode"
-		]
 		}
-	}
 }
 }
