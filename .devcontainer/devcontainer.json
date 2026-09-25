@@ -7,7 +7,7 @@
 		"ghcr.io/postfinance/devcontainer-features/terraform:1": {
 			"version": "latest"
 		},
-		"customizations": {
+	"customizations": {
 		"vscode": {
 		"extensions": [
 			"hashicorp.terraform",
@@ -15,4 +15,5 @@
 		]
 		}
 	}
+}
 }
